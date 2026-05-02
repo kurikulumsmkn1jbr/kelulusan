@@ -1,0 +1,7 @@
+Urutan yang perlu di edit
+
+1. Nama Lembaga baris 6
+2. link logo baris 36
+3. Data Lembaga baris 38 dan 39
+4. contoh nomor baris 44
+5. link database baris 74

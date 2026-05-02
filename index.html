@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+    <title>Sistem Pengumuman Kelulusan - SMK NEGERI 1 JEMBER</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+
+    <style>
+        html { -webkit-text-size-adjust: 100%; touch-action: none; }
+        * { -webkit-tap-highlight-color: transparent; }
+        #navbar-iframe, .navbar, .header-outer, .sidebar-wrapper, .footer-outer, .mobile-nav, .search-button, .blog-pager, .post-footer, .feed-links, .comments, #blog-pager, .breadcrumbs, .home-link { display:none !important; visibility:hidden !important; }
+        body { margin:0; padding:0; background:#f8fafc; font-family:'Plus Jakarta Sans',sans-serif; overflow:hidden; overscroll-behavior-y:contain; }
+        #app-portal { position:fixed; inset:0; width:100%; height:100%; background:radial-gradient(at 0% 0%, hsla(161,65%,92%,1) 0, transparent 50%), radial-gradient(at 100% 0%, hsla(210,100%,96%,1) 0, transparent 50%), #ffffff; z-index:99999999; overflow-y:auto; display:flex; flex-direction:column; }
+        .wrapper { width:100%; max-width:480px; margin:auto; padding:40px 24px; box-sizing:border-box; }
+        .header-brand{text-align:center;margin-bottom:35px}.madrasah-logo{width:90px;margin-bottom:15px}.label-status{font-size:12px;font-weight:800;color:#059669;text-transform:uppercase;letter-spacing:3px;display:block;margin-bottom:5px}.main-title{font-size:26px;font-weight:800;color:#1e293b;margin:0}.school-name{font-size:15px;color:#64748b;margin:8px 0;font-weight:600}.tp-pill{display:inline-block;background:#334155;color:#fff;padding:6px 18px;border-radius:50px;font-size:11px;font-weight:700;margin-top:5px}
+        .card-box{background:rgba(255,255,255,.8);backdrop-filter:blur(10px);border-radius:32px;padding:35px 25px;box-shadow:0 20px 40px rgba(0,0,0,.04);border:1px solid #f1f5f9}
+        .input-label-fancy{text-align:center;font-size:15px;font-weight:800;color:#475569;margin-bottom:20px;display:block;text-transform:uppercase}
+        input{width:100%;padding:18px;border:2px solid #f1f5f9;border-radius:20px;font-size:16px;text-align:center;font-family:inherit;box-sizing:border-box}
+        .btn-check{width:100%;margin-top:15px;padding:20px 22px;background:linear-gradient(135deg,#ef4444 0%,#dc2626 35%,#b91c1c 100%);background-size:200% 200%;animation:gradientMove 6s ease infinite;border:none;border-radius:24px;font-size:15px;font-weight:800;color:#ffffff;cursor:pointer;letter-spacing:.6px;box-shadow:0 14px 30px rgba(220,38,38,.35), inset 0 1px 0 rgba(255,255,255,.25);backdrop-filter:blur(10px);position:relative;overflow:hidden;transition:all .3s ease}.btn-check::before{content:'';position:absolute;inset:0;background:linear-gradient(120deg,transparent 20%,rgba(255,255,255,.25) 50%,transparent 80%);transform:translateX(-120%);animation:shineMove 3s infinite}.btn-check:hover{transform:translateY(-2px) scale(1.01);box-shadow:0 18px 36px rgba(220,38,38,.4), inset 0 1px 0 rgba(255,255,255,.3)}
+        .btn-check:disabled{background:linear-gradient(135deg,#22c55e 0%,#16a34a 35%,#15803d 100%);color:#ffffff;opacity:1;cursor:not-allowed;box-shadow:0 14px 30px rgba(34,197,94,.35)}
+        #result-area{margin-top:30px}
+        .res-container{padding:35px 20px;border-radius:30px;text-align:center;background:#fff;border:2px solid #f1f5f9}
+        .badge-status{display:inline-block;margin:20px 0;padding:12px 45px;border-radius:100px;font-weight:800;color:#fff;font-size:18px}.bg-lulus{background:linear-gradient(45deg,#10b981,#059669)}.bg-gagal{background:linear-gradient(45deg,#ef4444,#dc2626)}
+        .quote-box{background:#f8fafc;padding:18px;border-radius:22px;margin:10px 0;border:1px solid #f1f5f9}
+        .btn-dual{margin-top:25px;padding:20px;border-radius:20px;font-size:14px;font-weight:800;text-decoration:none;display:flex;align-items:center;justify-content:center;background:#1e293b;color:#fff}
+        @keyframes gradientMove{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}} @keyframes shineMove{0%{transform:translateX(-120%)}100%{transform:translateX(120%)}} .footer-note{text-align:center;margin-top:40px;font-size:11px;color:#94a3b8}
+    </style>
+</head>
+<body oncontextmenu="return false;">
+<div id="app-portal">
+<div class="wrapper">
+<header class="header-brand">
+<img alt="Logo" class="madrasah-logo" src="smesalogo.png" />
+<span class="label-status">Pengumuman Kelulusan</span>
+<h1 class="main-title">SMKN 1 JEMBER</h1>
+<p class="school-name">Provinsi Jawa Timur - Kabupaten Jember</p>
+<div class="tp-pill">Tahun Pelajaran 2025/2026</div>
+</header>
+<main class="card-box">
+<label class="input-label-fancy">Masukkan Nomor induk Siswa Nasional (NISN)</label>
+<input autocomplete="off" id="userInput" placeholder="Contoh: 0073256958" type="text" />
+<button class="btn-check" id="btnRun" onclick="actionCheck()" disabled>Mengecek Jadwal...</button>
+<div id="result-area"></div>
+</main>
+<footer class="footer-note">© 2026 SMESA <br />SMK NEGERI 1 JEMBER</footer>
+</div>
+</div>
+<script>
+const TAHUN = 2026;
+const BULAN = 5;
+const TANGGAL = 2;
+const JAM = 11;
+const MENIT = 27;
+const DETIK = 0;
+let canAccess = false;
+function startCountdown(){
+ const targetDate = new Date(TAHUN,BULAN-1,TANGGAL,JAM,MENIT,DETIK).getTime();
+ const btn = document.getElementById('btnRun');
+ const timer = setInterval(()=>{
+   const now = new Date().getTime();
+   const distance = targetDate-now;
+   if(distance<0){clearInterval(timer);canAccess=true;btn.disabled=false;btn.innerText='LIHAT HASIL KELULUSAN';btn.style.background='linear-gradient(135deg,#16a34a 0%,#15803d 40%,#166534 100%)';btn.style.boxShadow='0 14px 30px rgba(22,163,74,.35)';return;}
+   const days=Math.floor(distance/(1000*60*60*24));
+   const hours=Math.floor((distance%(1000*60*60*24))/(1000*60*60));
+   const minutes=Math.floor((distance%(1000*60*60))/(1000*60));
+   const seconds=Math.floor((distance%(1000*60))/1000);
+   btn.innerHTML = `⏳ ${days} Hari • ${String(hours).padStart(2,'0')} Jam • ${String(minutes).padStart(2,'0')} Menit • ${String(seconds).padStart(2,'0')} Detik`;
+ },1000);
+}
+startCountdown();
+const URL_DATABASE='datalulussiswa.csv';
+function actionCheck(){
+ if(!canAccess)return;
+ const input=document.getElementById('userInput').value.trim();
+ const display=document.getElementById('result-area');
+ const btn=document.getElementById('btnRun');
+ if(!input){alert('Harap masukkan nomor peserta!');return;}
+ btn.disabled=true; btn.innerText='Mencari Data...';
+ Papa.parse(URL_DATABASE,{download:true,header:true,complete:function(results){
+   btn.disabled=false; btn.innerText='LIHAT HASIL KELULUSAN';
+   const siswa=results.data.find(s=>s.Nomor_Ujian===input);
+   if(siswa){
+     const isPass=siswa.Status.toUpperCase()==='LULUS';
+     const linkCetak=siswa.Link_SKL||siswa.Link_Transkrip;
+     const showButton=isPass&&linkCetak;
+     display.innerHTML=`<div class="res-container"><span style="color:#059669;font-size:11px;font-weight:800;">Data Ditemukan</span><h2>${siswa.Nama_Siswa}</h2><p>No. Peserta: <strong>${siswa.Nomor_Ujian}</strong></p><div class="badge-status ${isPass?'bg-lulus':'bg-gagal'}">${siswa.Status.toUpperCase()}</div><div class="quote-box"><p>"${siswa.Pesan||'Gunakan ilmu yang didapat untuk kebermanfaatan umat.'}"</p></div>${showButton?`<a href="${linkCetak}" target="_blank" class="btn-dual">📄 Cetak SKL & Transkrip Nilai</a>`:''}</div>`;
+   } else {
+     display.innerHTML='<div style="text-align:center;color:#64748b;font-size:14px;padding:30px;border:2px dashed #e2e8f0;border-radius:25px;">Data tidak ditemukan.</div>';
+   }
+ }});
+}
+</script>
+</body>
+</html>
