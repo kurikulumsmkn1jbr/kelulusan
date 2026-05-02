@@ -51,8 +51,8 @@
 <script>
 const TAHUN = 2026;
 const BULAN = 5;
-const TANGGAL = 2;
-const JAM = 15;
+const TANGGAL = 4;
+const JAM = 17;
 const MENIT = 00;
 const DETIK = 0;
 let canAccess = false;
@@ -86,7 +86,7 @@ function actionCheck(){
      const isPass=siswa.Status.toUpperCase()==='LULUS';
      const linkCetak=siswa.Link_SKL||siswa.Link_Transkrip;
      const showButton=isPass&&linkCetak;
-     display.innerHTML=`<div class="res-container"><span style="color:#059669;font-size:11px;font-weight:800;">Data Ditemukan</span><h2>${siswa.Nama_Siswa}</h2><p>No. Peserta: <strong>${siswa.Nomor_Ujian}</strong></p><div class="badge-status ${isPass?'bg-lulus':'bg-gagal'}">${siswa.Status.toUpperCase()}</div><div class="quote-box"><p>"${siswa.Pesan||'Gunakan ilmu yang didapat untuk kebermanfaatan umat.'}"</p></div>${showButton?`<a href="${linkCetak}" target="_blank" class="btn-dual">📄 SKL dapat diambil Mulai 5 Mei 2026 pukul 12.00 WIB</a>`:''}</div>`;
+     display.innerHTML=`<div class="res-container"><span style="color:#059669;font-size:11px;font-weight:800;">Data Ditemukan</span><h2>${siswa.Nama_Siswa}</h2><p>No. Peserta: <strong>${siswa.Nomor_Ujian}</strong></p><div class="badge-status ${isPass?'bg-lulus':'bg-gagal'}">${siswa.Status.toUpperCase()}</div><div class="quote-box"><p>"${siswa.Pesan||'Gunakan ilmu yang didapat untuk kebermanfaatan umat.'}"</p></div>${showButton?`<a href="${linkCetak}" target="_blank" class="btn-dual">📄 SKL dapat diambil Mulai 5 Mei 2026 pukul 13.00 WIB</a>`:''}</div>`;
    } else {
      display.innerHTML='<div style="text-align:center;color:#64748b;font-size:14px;padding:30px;border:2px dashed #e2e8f0;border-radius:25px;">Data tidak ditemukan.</div>';
    }
